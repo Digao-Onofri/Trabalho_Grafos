@@ -1,6 +1,7 @@
 from . import visualizacao as v
 from . import kruskal as k
 from . import prim as p
+from . import conectividade as c
 from .node import Mote, MAX_BATERIA
 from .cluster import selecionar_cluster_heads
 import copy
@@ -286,6 +287,7 @@ def comparar_algoritmos(instancia="rede50.txt", rodadas=2000, beta=0.5, porcenta
     # Carrega nós para Kruskal COM cluster heads
     nodes_kruskal_ch = v.leitura(instancia)
     total_motes = len([n for n in nodes_kruskal_ch if isinstance(n, Mote)])
+    c.exibir_relatorio_robustez(nodes_kruskal_ch)
     
     # Clona nós para as outras simulações (simulações independentes)
     nodes_kruskal_sem_ch = clonar_nodes(nodes_kruskal_ch)

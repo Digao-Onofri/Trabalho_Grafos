@@ -1,6 +1,6 @@
-# Trab_Graphs
+# Projeto - Aplicação de Grafos para Solução de Problemas
 
-Implementação de algoritmos de grafos para análise de redes de sensores sem fio (WSN).
+Implementação de algoritmos de grafos para análise de redes de sensores sem fio (RSSF) no monitoramento de fenômenos ambientais.
 
 ## Descrição
 
@@ -15,22 +15,22 @@ Este projeto compara o desempenho dos algoritmos de Kruskal e Prim para constru�
 ```
 Trab_Graphs/
 ├── Implementação/
-│   ├── run.py              # Script de execução principal
+│   ├── run.py                   # Script de execução principal
 │   ├── funcoes/
-│   │   ├── main.py         # Programa principal e comparação de algoritmos
-│   │   ├── kruskal.py      # Algoritmo de Kruskal
-│   │   ├── prim.py         # Algoritmo de Prim
-│   │   ├── cluster.py      # Seleção e rotação de cluster heads
-│   │   ├── node.py         # Classes Node, Mote e Station
-│   │   ├── visualizacao.py # Leitura de dados de rede
-│   │   └── README.md       # Documentação das funções
+│   │   ├── main.py              # Programa principal e comparação de algoritmos
+│   │   ├── arvoregeradora.py    # Algoritmos de Kruskal e Prim
+│   │   ├── conectividade.py     # Verifica conectividade das MSTs
+│   │   ├── cluster.py           # Seleção e rotação de cluster heads
+│   │   ├── node.py              # Classes Node, Mote e Station
+│   │   ├── leitura.py           # Leitura de dados de rede
+│   │   └── README.md            # Documentação das funções
 │   └── instancias/
-│       ├── rede50.txt      # Rede com 50 sensores
-│       ├── rede100.txt     # Rede com 100 sensores
-│       ├── rede200.txt     # Rede com 200 sensores
-│       └── rede400.txt     # Rede com 400 sensores
-├── Info/                   # Documentação e referências
-├── README.md               # Este arquivo
+│       ├── rede50.txt           # Rede com 50 sensores
+│       ├── rede100.txt          # Rede com 100 sensores
+│       ├── rede200.txt          # Rede com 200 sensores
+│       └── rede400.txt          # Rede com 400 sensores
+├── Info/                        # Documentação e referências
+├── README.md                    # Este arquivo
 └── LICENSE
 ```
 

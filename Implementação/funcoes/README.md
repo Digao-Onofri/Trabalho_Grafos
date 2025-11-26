@@ -1,4 +1,4 @@
-# Funcoes - Graph Algorithms for Wireless Sensor Networks
+# Funções - Análise de Algoritmos de Roteamento em Redes de Sensores Sem Fio aplicados ao cenário de monitoramento florestal
 
 Este módulo implementa algoritmos de grafos para redes de sensores sem fio, incluindo:
 - Algoritmo de Kruskal para árvore geradora mínima
@@ -25,10 +25,10 @@ python -m funcoes.main
 
 - `main.py` - Programa principal com funções de simulação e comparação
 - `node.py` - Classes Node, Mote e Station
-- `kruskal.py` - Implementação do algoritmo de Kruskal
-- `prim.py` - Implementação do algoritmo de Prim
-- `visualizacao.py` - Funções de leitura de arquivos de instância
+- `arvoregeradora.py` - Implementação do algoritmo de Kruskal e de Prim
+- `leitura.py` - Funções de leitura de arquivos de instância
 - `cluster.py` - Módulo de seleção e rotação de cluster heads
+- `conectividade.py` - Módulo de verificação de conectividade
 
 ## Funções e Classes
 
@@ -50,6 +50,7 @@ python -m funcoes.main
   - `__init__(self, id, x, y, bateria: float)` - Construtor
   - `bateria` (property/setter) - Retorna/define nível de bateria
   - `bateriaPct` (property) - Retorna porcentagem de bateria
+  - `consumir` (método) - Calcula gasto energético
 
 - `Station(Node)` - Classe para estação rádio base (herda de Node)
   - `__init__(self, id, x, y)` - Construtor
@@ -60,7 +61,7 @@ python -m funcoes.main
 
 ---
 
-### kruskal.py
+### arvoregeradora.py
 
 **Funções:**
 - `geraArestas(nodes: list[Node], beta=0.5, cluster_heads=None)` - Gera lista de arestas com custo energético ordenadas por peso
@@ -68,13 +69,6 @@ python -m funcoes.main
 - `find(link: list[int], x: int)` - Encontra representante do conjunto com compressão de caminho
 - `union(link, size, a, b)` - Une dois conjuntos por rank, retorna True se união ocorreu
 - `kruskal(nodes: list[Node], arcs: list[tuple], beta=0.5, cluster_heads=None)` - Constrói MST usando algoritmo de Kruskal com consumo de energia
-
----
-
-### prim.py
-
-**Funções:**
-- `geraArestas(nodes: list[Node], beta=0.5, cluster_heads=None)` - Gera lista de arestas com custo energético
 - `prim(nodes: list[Node], arcs: list[tuple], beta=0.5, cluster_heads=None)` - Constrói MST usando algoritmo de Prim com consumo de energia
 
 ---
@@ -88,7 +82,7 @@ python -m funcoes.main
 
 ---
 
-### visualizacao.py
+### leitura.py
 
 **Constantes:**
 - `BASE_DIR` - Diretório base do módulo

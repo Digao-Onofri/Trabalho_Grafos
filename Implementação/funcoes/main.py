@@ -1,6 +1,5 @@
-from . import visualizacao as v
-from . import kruskal as k
-from . import prim as p
+from . import leitura as l
+from . import arvoregeradora as mst
 from . import conectividade as c
 from .node import Mote, MAX_BATERIA
 from .cluster import selecionar_cluster_heads
@@ -96,8 +95,8 @@ def simular_descarga_kruskal(nodes, rodadas=5, beta=0.5, porcentagem_ch=0.1, ver
                 print(f"Cluster Heads selecionados: {sorted(cluster_heads)}")
         
         # Gera arestas e constrói MST considerando cluster heads
-        arcs = k.geraArestas(nodes, beta, cluster_heads)
-        mst = k.kruskal(nodes, arcs, beta, cluster_heads)
+        arcs = mst.geraArestas(nodes, beta, cluster_heads)
+        tree = mst.kruskal(nodes, arcs, beta, cluster_heads)
         
         # Conta motes ativos
         motes_ativos = 0
@@ -120,7 +119,7 @@ def simular_descarga_kruskal(nodes, rodadas=5, beta=0.5, porcentagem_ch=0.1, ver
             
             print(f"\nMotes ativos: {motes_ativos}/{total_motes}")
             print(f"Bateria total restante: {total_bateria:.2f}")
-            print(f"Arestas na MST: {len(mst)}")
+            print(f"Arestas na MST: {len(tree)}")
         
         rodadas_executadas = rodada
         
@@ -130,7 +129,7 @@ def simular_descarga_kruskal(nodes, rodadas=5, beta=0.5, porcentagem_ch=0.1, ver
                 print(f"\n*** SIMULAÇÃO ENCERRADA NA RODADA {rodada}: Todos os motes ficaram sem bateria ***")
             break
         
-        if len(mst) == 0:
+        if len(tree) == 0:
             if verbose:
                 print(f"\n*** SIMULAÇÃO ENCERRADA NA RODADA {rodada}: Não há mais arestas disponíveis na MST ***")
             break
@@ -191,8 +190,8 @@ def simular_descarga_prim(nodes, rodadas=5, beta=0.5, porcentagem_ch=0.1, verbos
                 print(f"Cluster Heads selecionados: {sorted(cluster_heads)}")
         
         # Gera arestas e constrói MST usando Prim
-        arcs = p.geraArestas(nodes, beta, cluster_heads)
-        mst = p.prim(nodes, arcs, beta, cluster_heads)
+        arcs = mst.geraArestas(nodes, beta, cluster_heads)
+        tree = mst.prim(nodes, arcs, beta, cluster_heads)
         
         # Conta motes ativos
         motes_ativos = 0
@@ -215,7 +214,7 @@ def simular_descarga_prim(nodes, rodadas=5, beta=0.5, porcentagem_ch=0.1, verbos
             
             print(f"\nMotes ativos: {motes_ativos}/{total_motes}")
             print(f"Bateria total restante: {total_bateria:.2f}")
-            print(f"Arestas na MST: {len(mst)}")
+            print(f"Arestas na MST: {len(tree)}")
         
         rodadas_executadas = rodada
         
@@ -225,7 +224,7 @@ def simular_descarga_prim(nodes, rodadas=5, beta=0.5, porcentagem_ch=0.1, verbos
                 print(f"\n*** SIMULAÇÃO ENCERRADA NA RODADA {rodada}: Todos os motes ficaram sem bateria ***")
             break
         
-        if len(mst) == 0:
+        if len(tree) == 0:
             if verbose:
                 print(f"\n*** SIMULAÇÃO ENCERRADA NA RODADA {rodada}: Não há mais arestas disponíveis na MST ***")
             break
@@ -285,7 +284,7 @@ def comparar_algoritmos(instancia="rede50.txt", rodadas=2000, beta=0.5, porcenta
     print("=" * 90)
     
     # Carrega nós para Kruskal COM cluster heads
-    nodes_kruskal_ch = v.leitura(instancia)
+    nodes_kruskal_ch = l.leitura(instancia)
     total_motes = len([n for n in nodes_kruskal_ch if isinstance(n, Mote)])
     c.exibir_relatorio_robustez(nodes_kruskal_ch)
     

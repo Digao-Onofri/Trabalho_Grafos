@@ -1,5 +1,5 @@
 import sys
-from .kruskal import geraArestas, unionfind_init, union, find
+from .arvoregeradora import geraArestas, unionfind_init, union, find
 from .node import Mote, dist, MAX_RAIO
 
 # Aumenta o limite de recursão para garantir que a DFS funcione em redes grandes
@@ -58,7 +58,6 @@ def encontrar_nos_criticos_simulacao(nodes):
             nos_criticos.append(nodes[indice_alvo].id)
 
     return sorted(nos_criticos)
-
 
 # =============================================================================
 # MÉTODO 2: DFS (ALGORITMO DE TARJAN - PONTOS DE ARTICULAÇÃO)

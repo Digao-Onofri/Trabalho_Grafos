@@ -40,7 +40,11 @@ class Mote(Node):
     
     @property
     def bateriaPct(self) -> float:
-        return (self.__bateria / MAX_BATERIA) * 100.0   
+        return (self.__bateria / MAX_BATERIA) * 100.0
+    
+    def consumir(self, distancia: float, fator: float = 1.0, custo_base: float = 0.01):
+        consumo = custo_base * distancia * fator
+        self.bateria -= consumo
 
 class Station(Node):
 
@@ -54,8 +58,6 @@ class Station(Node):
     @bateria.setter
     def bateria(self, value: float) -> None:
         pass 
-
-# Funct
 
 def dist(a: Node, b: Node) -> float:
     return math.hypot(a.x - b.x, a.y - b.y)

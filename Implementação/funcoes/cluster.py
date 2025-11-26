@@ -3,7 +3,7 @@ Módulo de seleção e rotação de Cluster Heads.
 Implementa rotação de cluster heads para distribuir consumo de energia uniformemente.
 """
 
-from .node import Mote, Station, dist, MAX_RAIO
+from .node import Mote, dist
 
 def selecionar_cluster_heads(nodes, porcentagem=0.1, rodada=0):
     """
@@ -75,7 +75,6 @@ def selecionar_cluster_heads(nodes, porcentagem=0.1, rodada=0):
     
     return cluster_heads
 
-
 def calcular_custo_com_rotacao(sensor, ch, cluster_heads, beta=0.5, eps=0.0001):
     """
     Calcula o custo de associação considerando se o nó destino é cluster head.
@@ -127,7 +126,6 @@ def calcular_custo_com_rotacao(sensor, ch, cluster_heads, beta=0.5, eps=0.0001):
     
     return custo_base
 
-
 def consumir_energia_com_rotacao(sensor, ch, cluster_heads, beta=0.5, custo_base=0.01):
     """
     Consome energia do sensor e do cluster head de forma balanceada.
@@ -142,20 +140,14 @@ def consumir_energia_com_rotacao(sensor, ch, cluster_heads, beta=0.5, custo_base
     :param custo_base: Fator base de consumo de energia
     """
     dij = dist(sensor, ch)
-    
-    # Consumo proporcional à distância (modelo simplificado de transmissão)
-    consumo_transmissao = custo_base * dij
-    
-    # Sensor (origem) consome energia para transmitir
+
+    # Sensor consome energia para transmitir
     if isinstance(sensor, Mote) and sensor.bateria > 0:
-        sensor.bateria -= consumo_transmissao
-    
-    # Cluster head (destino) consome energia adicional para agregar/receber
-    # Cluster heads consomem um pouco mais por serem responsáveis pelo cluster
+        sensor.consumir(dij, fator=1.0, custo_base=custo_base)
+
+    # Destino consome energia ao receber
     if isinstance(ch, Mote) and ch.bateria > 0:
         if ch.id in cluster_heads:
-            # CH consome mais por ser coordenador
-            ch.bateria -= consumo_transmissao * 1.2
+            ch.consumir(dij, fator=1.2, custo_base=custo_base)  # CH consome mais
         else:
-            # Nó intermediário consome menos
-            ch.bateria -= consumo_transmissao * 0.5
+            ch.consumir(dij, fator=0.5, custo_base=custo_base)  # nó comum consome menos

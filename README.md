@@ -2,6 +2,10 @@
 
 Implementação de algoritmos de grafos para análise de redes de sensores sem fio (RSSF) no monitoramento de fenômenos ambientais.
 
+Link para os slides: https://www.canva.com/design/DAG51D2vkWE/1ReQ6P-n-Uxy4azxtzxXug/edit?utm_content=DAG51D2vkWE&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+
+Link para o video: https://youtu.be/x76XJ7n-nFc
+
 ## Descrição
 
 Este projeto compara o desempenho dos algoritmos de Kruskal e Prim para construção de árvores geradoras mínimas (MST) em redes de sensores sem fio, considerando:
